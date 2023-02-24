@@ -8,11 +8,17 @@ class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    LoginController controller = Get.put(LoginController());
     return Scaffold(
-      backgroundColor: HexColor("#feeee8"),
+      //membuat halaman dengan widget scaffold
+      backgroundColor: HexColor(
+          "#feeee8"), //memberikan background tampilan dengan kode warna hexadesimal
       body: SingleChildScrollView(
+        //menambahkan singlechildscrollview untuk membuat halaman bisa di scroll
         child: Column(
+          //membungkus widget dgn column agar dpt menampilkan widget scr vertikal/kebawah
           children: [
+            //menambah animasi lottie dgn menambah file dr url
             Padding(
               padding: const EdgeInsets.only(top: 70.0),
               child: Lottie.network(
@@ -20,17 +26,20 @@ class LoginView extends GetView<LoginController> {
                 fit: BoxFit.cover,
               ),
             ),
-            const Padding(
+            Padding(
+              //menambah textfield untuk mengambil input email
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: controller.emailController,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Email",
-                  hintText: "Masukan Email",
+                  border: OutlineInputBorder(), //memberikan border pd textfield
+                  labelText: "Email", //memberikan label pd textfield
+                  hintText: "Masukan Email", //memberikan hinttext pd textfield
                 ),
               ),
             ),
-            const Padding(
+            Padding(
+              //menambahkan textfield untuk mengambil input password
               padding: EdgeInsets.only(
                 left: 15.0,
                 right: 15.0,
@@ -38,31 +47,38 @@ class LoginView extends GetView<LoginController> {
                 bottom: 0,
               ),
               child: TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Password",
-                    hintText: "Masukan Password",
-                  ),
+                controller: controller.passwordController,
+                obscureText: true, //mengubah text input menjadi pw
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(), //memberikan border pd textfield
+                  labelText: "Password", //memberikan label pd textfield
+                  hintText:
+                      "Masukan Password", //memberikan hinttext pd textfield
+                ),
               ),
             ),
             const SizedBox(
+              //menambahkan tombol login
               height: 10,
             ),
             Container(
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
+                color: Colors.blue, //memberikan warna pd background container
+                borderRadius: BorderRadius.circular(
+                    20), //memberikan radius border pd container
               ),
               child: TextButton(
-                onPressed: () {},
+                //memberikan aksi ketika tombol login ditekan
+                onPressed: () {
+                  controller.loginNow();
+                },
                 child: const Text(
                   "Login",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
+                    color: Colors.white, //memberikan warna pd text tombol
+                    fontSize: 25, //mengukur ukuran font pd text yg ada ditombol
                   ),
                 ),
               ),
